@@ -6,12 +6,48 @@ CREATE DATABASE `bfa` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 USE `bfa`;
 
-CREATE TABLE `hi` (
-    `lang` VARCHAR(2),
-    `msg` TEXT NOT NULL,
-    PRIMARY KEY(`lang`)
+CREATE TABLE `garage` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `name` TEXT NOT NULL,
+    `city` TEXT NOT NULL,
+    `maxCapacity` INT NOT NULL,
+    PRIMARY KEY(`id`)
 );
 
-INSERT INTO `hi`(`lang`, `msg`) VALUES ('hu', 'Szia <span class="name">%s</span>, mi a helyzet?');
-INSERT INTO `hi`(`lang`, `msg`) VALUES ('en', 'Hi <span class="name">%s</span>, what\'s up?');
-INSERT INTO `hi`(`lang`, `msg`) VALUES ('pl', 'Cześć Joe <span class="name">%s</span>, co się stało?');
+CREATE TABLE car (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `color` TEXT NOT NULL,
+    `year` INT NOT NULL,
+    `brand` TEXT NOT NULL,
+    `garageId` INT NOT NULL,
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`garageId`) REFERENCES garage(id)
+);
+
+INSERT INTO `garage`(name, city, maxCapacity)
+    VALUES('John garage', 'Miskolc', 2);
+
+INSERT INTO `garage`(name, city, maxCapacity)
+VALUES('Misi garage', 'Encs', 1);
+
+INSERT INTO `garage`(name, city, maxCapacity)
+VALUES('Will garage', 'Felsőzsolca', 3);
+
+INSERT INTO `car`(color, year, brand, garageId)
+VALUES('blue', 2009, 'Suzuki', 1);
+
+INSERT INTO `car`(color, year, brand, garageId)
+VALUES('white', 2005, 'Fiat', 1);
+
+INSERT INTO `car`(color, year, brand, garageId)
+VALUES('black', 2009, 'Saab', 2);
+
+INSERT INTO `car`
+VALUES(NULL, 'grey', 2007, 'Mercedes', 3);
+INSERT INTO `car` VALUES (NULL, 'red', 2005, 'BMW', 3);
+INSERT INTO `car` VALUES (NULL, 'white', 2000, 'Opel', 3);
+
+
+
+
+
