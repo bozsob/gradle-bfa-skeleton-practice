@@ -18,7 +18,7 @@ $(document).ready(function() {
                         "<td>" + name + "</td>" +
                         "<td>" + city + "</td>" +
                         "<td>" + capacity + "</td>" +
-                        "<td><a href=\"cars.html?id=\"" + id + ">Show cars</a></td>" + "</tr>";
+                        "<td><a href=\"name.jsp?id=\"" + id + ">Show cars</a></td>" + "</tr>";
 
                 $("#garage").append(htmlString);
 

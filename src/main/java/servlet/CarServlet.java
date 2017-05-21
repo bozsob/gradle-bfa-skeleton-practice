@@ -23,12 +23,15 @@ public class CarServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
 
+
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
 
-        int id = Integer.parseInt(request.getParameter("id"));
+        int id = Integer.valueOf(request.getParameter("id"));
+        System.out.println("id: " + id);
 
         List<Car> cars = new ArrayList<>();
         DatabaseCarDao carDao = new DatabaseCarDao(ConnectionUtil

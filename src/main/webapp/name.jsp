@@ -10,7 +10,14 @@
     <link href="name.css" rel="stylesheet"/>
 </head>
 <body>
-<h1>${msg}</h1>
-<a href="..">Go back</a>
+<h1>Cars</h1>
+<div id="cars"></div>
+
+<h2>Add a new car</h2>
+
+    Car brand <input type="text" name="brand"><br>
+    Year <input type="text" name="year"><br>
+    Color <input type="text" name="year">
+
 </body>
 </html>
