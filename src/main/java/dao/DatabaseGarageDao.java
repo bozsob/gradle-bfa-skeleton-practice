@@ -2,10 +2,7 @@ package dao;
 
 import model.Garage;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,13 +17,14 @@ public class DatabaseGarageDao implements GarageDao {
     @Override
     public List<Garage> getAllGarages() throws SQLException {
 
-        Statement st = conn.createStatement();
 
-        String query = String.format("SELECT * FROM `garage`");
-        ResultSet rs = st.executeQuery(query);
+        String query = "SELECT * FROM `garage`";
+        PreparedStatement ps = conn.prepareStatement(query);
+        ResultSet rs = ps.executeQuery(query);
+
         List<Garage> garages = new ArrayList<>();
 
-        if(rs.next()) {
+        while(rs.next()) {
             garages.add(new Garage(rs.getInt(1),
                 rs.getString(2),
                 rs.getString(3),
