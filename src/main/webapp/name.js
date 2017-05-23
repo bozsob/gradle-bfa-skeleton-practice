@@ -5,32 +5,64 @@ $(document).ready(function() {
         type: "get",
         data : {"id" : getIdFromUrl},
         success: function(data) {
-            for(var i = 0; i < data.length; i++) {
-                var id = data[i].id;
-                var color = data[i].color;
-                var year = data[i].year;
-                var brand = data[i].brand;
-                var garageId = data[i].garageId;
+
+            var htmlString = "<table id='table'><tr>" +
+                "<th>Id</th>" +
+                "<th>Brand</th>" +
+                "<th>Year</th>" +
+                "<th>Color</th>" +
+                "<th>GarageId</th></tr>";
+
+            var htmlString;
+
+            data.forEach(function (car) {
+                htmlString += "<tr><td>" + car.id + "</td>" +
+                    "<td>" + car.brand + "</td>" +
+                    "<td>" + car.year + "</td>" +
+                    "<td>" + car.color + "</td>" +
+                    "<td>" + car.garageId + "</td></tr>";
+            });
+            htmlString += "</table>";
+            $("#cars").append(htmlString);
+        }
+    });
+
+    $("#add").click(function () {
+        var brand = $("#brand").val();
+        var year = $("#year").val();
+        var color = $("#color").val();
+        var id = getIdFromUrl;
+        console.log("brand" + brand, "year" + year,
+            "color" + color, "garageId" + id);
+        $.ajax({
+            url : "/car",
+            type : "post",
+            data : {"brand" : brand, "year" : year,
+                "color" : color, "garageId" : id},
+
+            success: function(data) {
+                var id = data.id;
+                var color = data.color;
+                var year = data.year;
+                var brand = data.brand;
+                var garageId = data.garageId;
 
                 console.log("id: " + id + " - brand: " + brand
                     + " - year: " + year + " - color: " + color
                     + " - garageId: " + garageId);
 
-                var htmlString = "Brand: " + brand +
-                        " - Year: " + year +
-                        " - Color: " + color + "<br>";
+                var newLine = "<tr><td>" + data.id + "</td>" +
+                    "<td>" + data.brand + "</td>" +
+                    "<td>" + data.year + "</td>" +
+                    "<td>" + data.color + "</td>" +
+                    "<td>" + data.garageId + "</td></tr>";
 
-                $("#cars").append(htmlString);
+                $("#table").append(newLine);
+
             }
 
-        }
-    })
-
-    $.ajax({
-        url : "/car",
-        type : "post",
-        data : {}
-    })
+        })
+    });
 
     function getIdFromUrl() {
         var id = window.location.search.substring(4);

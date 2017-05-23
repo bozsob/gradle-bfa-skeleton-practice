@@ -56,25 +56,29 @@ public class DatabaseCarDao implements CarDao {
     }
 
     @Override
-    public Car addCar(Car car) throws SQLException {
+    public Car addCar(String color, int year, String brand, int garageId) throws SQLException {
 
 
-        String query = "INSERT INTO `car` VALUES(NULL,?,?,?,?";
+        String query = "INSERT INTO `car` VALUES(NULL,?,?,?,?)";
         PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
-        ps.setString(1, car.getColor());
-        ps.setInt(2, car.getYear());
-        ps.setString(3, car.getBrand());
-        ps.setInt(4, car.getGarageId());
+        ps.setString(1, color);
+        ps.setInt(2, year);
+        ps.setString(3, brand);
+        ps.setInt(4, garageId);
 
         ps.executeUpdate();
 
         ResultSet rs = ps.getGeneratedKeys();
-
+        Car car = null;
         if(rs.next()) {
-            car.setId(rs.getInt(1));
-            return car;
+            car = new Car(rs.getInt(1),
+                color,
+                year,
+                brand,
+                garageId);
+
         }
-        return null;
+        return car;
     }
 }

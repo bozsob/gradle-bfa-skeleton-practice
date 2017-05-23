@@ -25,13 +25,13 @@ CREATE TABLE car (
 );
 
 INSERT INTO `garage`(name, city, maxCapacity)
-    VALUES('John garage', 'Miskolc', 2);
+    VALUES('John garage', 'Miskolc', 3);
 
 INSERT INTO `garage`(name, city, maxCapacity)
-VALUES('Misi garage', 'Encs', 1);
+VALUES('Misi garage', 'Encs', 4);
 
 INSERT INTO `garage`(name, city, maxCapacity)
-VALUES('Will garage', 'Felsőzsolca', 3);
+VALUES('Will garage', 'Felsőzsolca', 4);
 
 INSERT INTO `car`(color, year, brand, garageId)
 VALUES('blue', 2009, 'Suzuki', 1);

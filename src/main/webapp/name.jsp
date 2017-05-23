@@ -15,9 +15,10 @@
 
 <h2>Add a new car</h2>
 
-    Car brand <input type="text" name="brand"><br>
-    Year <input type="text" name="year"><br>
-    Color <input type="text" name="year">
+    Car brand <input id="brand" type="text" name="brand"><br>
+    Year <input id="year" type="text" name="year"><br>
+    Color <input id="color" type="text" name="color">
+        <input id="add" type="submit" value="Add">
 
 </body>
 </html>

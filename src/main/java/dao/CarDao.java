@@ -12,5 +12,5 @@ public interface CarDao {
 
     List<Car> getAllCars() throws SQLException;
     List<Car> getCarsByGarage(int id) throws SQLException;
-    Car addCar(Car car) throws SQLException;
+    Car addCar(String color, int year, String brand, int garageId) throws SQLException;
 }

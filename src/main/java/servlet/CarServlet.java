@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +24,25 @@ public class CarServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
 
+        String brand = request.getParameter("brand");
+        Integer year = Integer.valueOf(request.getParameter("year"));
+        String color = request.getParameter("color");
+        Integer garageId = Integer.parseInt(request.getParameter("garageId"));
 
+        Car car = new Car(color, year, brand, garageId);
+
+        DatabaseCarDao carDao = new DatabaseCarDao(ConnectionUtil
+        .getConnection(ConnectionUtil.DatabaseName.BFA));
+
+        try {
+            Car resultCar = carDao.addCar(color, year, brand, garageId);
+            response.setContentType("application/json");
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.writeValue(response.getOutputStream(), resultCar);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 

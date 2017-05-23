@@ -4,9 +4,26 @@ $(document).ready(function() {
         url : "/garage",
         type : "get",
         success : function (data) {
+            var htmlString = "<table><tr>" +
+                "<th>Id</th>" +
+                "<th>Name</th>" +
+                "<th>City</th>" +
+                "<th>Capacity</th>" +
+                "<th>Cars</th></tr>";
 
-            console.log(data);
-            for(var i = 0; i < data.length; i++) {
+            data.forEach(function (garage) {
+
+                htmlString += "<tr><td>" + garage.id + "</td>" +
+                    "<td>" + garage.name + "</td>" +
+                    "<td>" + garage.city + "</td>" +
+                    "<td>" + garage.maxCapacity + "</td>" +
+                    "<td><a href='name.jsp?id=" + garage.id + "'>Show cars</a></td></tr>";
+            });
+            htmlString += "</table>";
+            $("#garage").append(htmlString);
+
+
+            /*for(var i = 0; i < data.length; i++) {
                 var id = data[i].id;
                 var name = data[i].name;
                 var city = data[i].city;
@@ -18,12 +35,11 @@ $(document).ready(function() {
                         "<td>" + name + "</td>" +
                         "<td>" + city + "</td>" +
                         "<td>" + capacity + "</td>" +
-                        "<td><a href=\"name.jsp?id=\"" + id + ">Show cars</a></td>" + "</tr>";
+                        "<td><a href='name.jsp?id=" + id + "'>Show cars</a></td></tr><br>";
 
                 $("#garage").append(htmlString);
-
-
             }
+             */
 
         }
     })
